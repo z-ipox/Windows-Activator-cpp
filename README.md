@@ -8,7 +8,7 @@ Rus:
   -Если у вас при запуске Windows Activator ошибка MSVCP140.dll или VCRUNTIME140.dll, установите Visual Studio C++ 2015             
   -Или установите/запустите vc_redist.x86.exe                     
      
-Eng:
+Eng:               
  -Console activator Windows 8; 8.1; 10; 11; Windows Server in C++                  
  -A simple script for entering commands into the console on behalf of the administrator, add. windows versions      
 ADDITION:              
