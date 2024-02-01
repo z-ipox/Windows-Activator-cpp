@@ -1,5 +1,5 @@
-#### WINDOWS ACTIVATOR
-https://i.postimg.cc/SQWKdwMb/2024-01-25-112449722.png
+###Windows Activator
+![](https://i.postimg.cc/SQWKdwMb/2024-01-25-112449722.png)
 
 Rus:
   -Консольный активатор винды 8; 8.1; 10; 11; Windows Server на C++
@@ -14,3 +14,8 @@ Eng:
 ADDITION:
   -If you have an error when starting Windows Activator MSVCP140.dll or VCRUNTIME140.dll install Visual Studio C++ 2015
   -Or install/run vc_redist.x86.exe
+
+
+
+
+
