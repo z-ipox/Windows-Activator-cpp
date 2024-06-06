@@ -12,7 +12,6 @@
 #define back 8
 #define esc 27
 #define ENTR 13
-#define ecs 27
 
 using namespace std;
 
