@@ -6,16 +6,24 @@
 #include <stralign.h>
 #include <string>
 #include <conio.h>
+#include <mmsystem.h>
+
+#pragma comment(lib, "winmm.lib")
 
 #define UP 72 
 #define DWN 80 
 #define back 8
 #define esc 27
 #define ENTR 13
+#define ETR 13
+#define upa 72
+#define dwns 80
+
 
 using namespace std;
 
 HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE); 
+
 
 
 void ConsoleCursorVisible(bool show, short size)
@@ -27,6 +35,7 @@ void ConsoleCursorVisible(bool show, short size)
 	SetConsoleCursorInfo(hStdOut, &structCursorInfo);
 }
 
+
 void GoToXY(short x, short y)
 {
 	SetConsoleCursorPosition(hStdOut, { x, y });
@@ -37,25 +46,35 @@ void GoToXB(short b, short s)
 	SetConsoleCursorPosition(hStdOut, { b, s });
 }
 
+void GoToMN(short m, short n)
+{
+	SetConsoleCursorPosition(hStdOut, { m, n });
+}
+
 
 int main() {
+	waveOutSetVolume(0, 0x20002000);
+	PlaySound(TEXT(".\\sounds\\main.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	setlocale(LC_ALL, "ru");
 	system("mode con cols=162 lines=19");
 	ConsoleCursorVisible(false, 100);
 	string Stral[] = { " [>>]" };
 	string Stral2[] = { " [>] " };
-	string Menu[] = { Stral2[0] + " ДИСК",  Stral2[0] + " Активация Windows 10",  Stral2[0] + " Активация Windows 11",  Stral2[0] + " Информация",  Stral2[0] + " Выход"};
+	string Menu[] = { Stral2[0] + " ДИСК",  Stral2[0] + " Активация Windows 10",  Stral2[0] + " Активация Windows 11",  Stral2[0] + " Информация",  Stral2[0] + " Выход" };
 	string Logo[] = { " $$\\      $$\\ $$\\                 $$\\                                          $$$$$$\\              $$\\     $$\\                      $$\\                           $$ | $\\  $$ |\\__|                $$ |                                        $$  __$$\\             $$ |    \\__|                     $$ |                          $$ |$$$\\ $$ |$$\\ $$$$$$$\\   $$$$$$$ | $$$$$$\\  $$\\  $$\\  $$\\  $$$$$$$\\       $$ /  $$ | $$$$$$$\\ $$$$$$\\   $$\\ $$\\    $$\\ $$$$$$\\ $$$$$$\\    $$$$$$\\   $$$$$$\\    $$ $$ $$\\$$ |$$ |$$  __$$\\ $$  __$$ |$$  __$$\\ $$ | $$ | $$ |$$  _____|      $$$$$$$$ |$$  _____|\\_$$  _|  $$ |\\$$\\  $$  |\\____$$\\\\_$$  _|  $$  __$$\\ $$  __$$\\   $$$$  _$$$$ |$$ |$$ |  $$ |$$ /  $$ |$$ /  $$ |$$ | $$ | $$ |\\$$$$$$\\        $$  __$$ |$$ /        $$ |    $$ | \\$$\\$$  / $$$$$$$ | $$ |    $$ /  $$ |$$ |  \\__|  $$$  / \\$$$ |$$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ | $$ | $$ | \\____$$\\       $$ |  $$ |$$ |        $$ |$$\\ $$ |  \\$$$  / $$  __$$ | $$ |$$\\ $$ |  $$ |$$ |        $$  /   \\$$ |$$ |$$ |  $$ |\\$$$$$$$ |\\$$$$$$  |\\$$$$$\\$$$$  |$$$$$$$  |      $$ |  $$ |\\$$$$$$$\\   \\$$$$  |$$ |   \\$  /  \\$$$$$$$ | \\$$$$  |\\$$$$$$  |$$ |        \\__/     \\__|\\__|\\__|  \\__| \\_______| \\______/  \\_____\\____/ \\_______/       \\__|  \\__| \\_______|   \\____/ \\__|    \\_/    \\_______|  \\____/  \\______/ \\__|      " };
-	char ch, wd10, wd11, wds;
+	string info[] = { Stral2[0] + " [Discord]",  Stral2[0] + " [GitHub]" };
+	char ch, wd10, wd11, wds; 
 	wstring disc;
 	wstring dis = L"c";
-	int active_menu = 0;
+	int active_menu = 0, act_info =0;
 	SetConsoleTextAttribute(hStdOut, FOREGROUND_GREEN);
 
 	
 
 	while (true)
 	{
+		string Stral[] = { " [>>]" };
+		ExALL:
 		SetConsoleTitle(L"Windows Activator.v2 by CHEATER KID");
 		int b = 1, s = 1;
 		GoToXB(b, s);
@@ -72,7 +91,7 @@ int main() {
 			GoToXB(b, s++);
 			cout << Logo[a] << endl;
 		}
-
+		
 		int x = 5, y = 12;
 		GoToXY(x, y);
 
@@ -89,8 +108,6 @@ int main() {
 				GoToXY(x, y++);
 				cout << Menu[i];
 			}
-
-			/*cout << Menu[i] << endl;*/
 		}
 		
 		ch = _getch();
@@ -2520,14 +2537,100 @@ int main() {
 					break;
 				}
 			case 3:
+				system("cls");
+				waveOutSetVolume(0, 0x20002000);
+				PlaySound(TEXT(".\\sounds\\sound.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 				SetConsoleTitle(L"Информэйшен");
-				system("cls");
-				system("mode con cols=110 lines=24");
+				system("mode con cols=100 lines=41");
 				
-				SetConsoleTextAttribute(hStdOut, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-				cout << "Пользователь выбрал " << Menu[active_menu] << "\n";
-				_getch();
-				system("cls");
+				SetConsoleTextAttribute(hStdOut, FOREGROUND_RED);
+				cout << "\n\n";
+				cout << "                                                ^YYJYYYJYYYYJYJ.                                    \n";
+				cout << "                        .:!7~.         .~!!!!!!!?PPPPPPPPPPPPPP7!!!!!!!^                            \n";
+				cout << "                         ^5P?     .:::::5PPPPP55555555555555555PPPPPPPP?:::::.                      \n";
+				cout << "                                  ?PPPPPPPPPP5:              .:GGGGGGPPPPPPPP^                      \n";
+				cout << "                               ~YJPGG7^^^^^^^:     ~YYJJJJYJJJYPGGGGPPPPPPPPPYJJ.                   \n";
+				cout << "                         .!!!!~JPPGGG?~~!!!~~!!!!!!JPPPPPPPPPPPPPPPPPPPPPPPPPPPP7!~                 \n";
+				cout << "                  .:::.::~PPPPPPPPPPPPPPPPPPPPP555P55555555555555555555555PPPPPPPPP.                \n";
+				cout << "                 JPPPPPPPPPPPPPPPPPPPPPPPPPPP5:                          'JPPPPPPP5...              \n";
+				cout << "                 ^~~~~^~~7GG5~~^^~~~^YPP!^~~~^                            :^~~~~5PPJJ?..            \n";
+				cout << "                         :GGJ        YPP:      .:!!^                           .7?JGGP!!^           \n";
+				cout << "                       ::~PPJ        JP5:       ~PP7                              :PPPPP?           \n";
+				cout << "                      .5PPPPJ                                                       .^PP?           \n";
+				cout << "              !JJJJJJJYPPPPP5JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJYJJJJJJJJJJJJJJJJJYYYPP?           \n";
+				cout << "           ^~~YPPPPPPPPGGGGGGGGGGGPPPPPPPPPPPPPPPPPPPPPPPPPPPPPJJJJJYGGPPPPPPPPPPPPGGGPP?           \n";
+				cout << "           !PPP55555555GGGGGGGPPPGP5555555555555PPPP5555555555Y.    ~GPPPPP55555PPP555PP?           \n";
+				cout << "                      :PPPPPJ.                  !PP?                  '7PP7.    5P5: ^PP?           \n";
+				cout << "                      :PPPPP5JY!                .~!^             ^JJ7. :~~:.   .5PP. ^PP?           \n";
+				cout << "                       ?JYGGGBB?                                 :JY7           7JJ!~7PP?           \n";
+				cout << "                         ^GGGGGJ.                                                 :GGG5P7           \n";
+				cout << "           !PPPPPPPP55555PPPPPPP555555555555555555P7                   !P5555555555PP5::            \n";
+				cout << "           :!!~~~!!!PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP5?JJ??JJJ??JJ???JJJ?5GGGGGGGGPPP!!~              \n";
+				cout << "                    ?JJJJYPPPPPPPPPPPYJJJJJPPPPPPPPPPPPPPPPPPPPPPPPPPJJYYYYYYPGGPP5. .~~^           \n";
+				cout << "                         :PPPPPPPPPPP~..  .5PPPPPPPPPPPPPPPPPPPPPPPP?     ...YPPPP5. ^PP?           \n";
+				cout << "                          ::!PPGGGGGGGPP:                                 7P5PPP^                   \n";
+				cout << "                            ~PPPGGGGGGGGYJ?.                     .??????J?5PP?~!                    \n";
+				cout << "                            ~PPPGG5JJJJJGGG~^~!~^          .~~^^~7PPPPPPPP5JJ:                      \n";
+				cout << "                            ~PPGGG!    .YPPPPPGGY..      .::5PPPPPPPPPPPPP!                         \n";
+				cout << "                            ~PP?::            ^:~P555P555555PPP::::.!GGGPP!                         \n";
+				cout << "                            ~PP?                :7!!!!YPPPPP7!!     :!!JPP!                         \n";
+				cout << "                            ^JY!                      !YYPPP:          !PP!                         \n";
+				cout << "                                                         JPP:          7PP!                         \n";
+				cout << "                                                        .:::           7PP!                         \n";
+				cout << "                                                                       7PP!                         \n";
+				cout << "                                                                       ~YY~                         \n";
+				cout << "\n\n";
+				while (true)
+				{
+					int m = 5, n = 38;
+					for (int z = 0; z < sizeof(info) / sizeof(info[0]); z++) {
+						if (z == act_info) {
+							SetConsoleTextAttribute(hStdOut, FOREGROUND_RED);
+							info[z] = Stral[0] + info[z].substr(5);
+							GoToMN(m, n++);
+							cout << info[z];
+						}
+						else {
+							SetConsoleTextAttribute(hStdOut, FOREGROUND_RED | FOREGROUND_INTENSITY);
+							info[z] = Stral2[0] + info[z].substr(5);
+							GoToMN(m, n++);
+							cout << info[z];
+						}
+					}
+					ch = _getch();
+					if (ch == -32) ch = _getch();
+					switch (ch)
+					{
+					case esc:
+						system("cls");
+						system("mode con cols=162 lines=19");
+						waveOutSetVolume(0, 0x20002000);
+						PlaySound(TEXT(".\\sounds\\main.wav"), NULL, SND_FILENAME | SND_ASYNC);
+						goto ExALL;
+					case upa:
+						if (act_info > 0) {
+							--act_info;
+						}
+						break;
+
+					case dwns:
+						if (act_info < size(info) - 1) {
+							++act_info;
+						}
+						break;
+					case ETR:
+						switch (act_info)
+						{
+						case 0:
+							system("start https://discord.gg/SydPS5V6Pa");
+							break;
+						case 1:
+							system("start https://github.com/z-ipox");
+							break;
+						}
+						break;
+					}
+				}
 				system("mode con cols=162 lines=19");
 				break;
 			case 4:
